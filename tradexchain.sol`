@@ -1,1 +1,214 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
 
+/**
+ * @title TradeXChain
+ * @dev A decentralized trading platform for secure peer-to-peer asset exchange
+ * @author TradeXChain Team
+ */
+contract TradeXChain {
+    
+    // State variables
+    address public owner;
+    uint256 public tradeCounter;
+    uint256 public platformFeePercent = 25; // 0.25% (25/10000)
+    
+    // Structs
+    struct Trade {
+        uint256 tradeId;
+        address seller;
+        address buyer;
+        uint256 amount;
+        uint256 price;
+        string assetName;
+        TradeStatus status;
+        uint256 createdAt;
+        uint256 completedAt;
+    }
+    
+    enum TradeStatus {
+        Active,
+        Completed,
+        Cancelled,
+        Disputed
+    }
+    
+    // Mappings
+    mapping(uint256 => Trade) public trades;
+    mapping(address => uint256[]) public userTrades;
+    mapping(address => uint256) public userBalance;
+    mapping(address => bool) public verifiedTraders;
+    
+    // Events
+    event TradeCreated(
+        uint256 indexed tradeId, 
+        address indexed seller, 
+        uint256 amount, 
+        uint256 price, 
+        string assetName
+    );
+    
+    event TradeCompleted(
+        uint256 indexed tradeId, 
+        address indexed seller, 
+        address indexed buyer, 
+        uint256 amount
+    );
+    
+    event TradeCancelled(uint256 indexed tradeId, address indexed seller);
+    
+    event FundsDeposited(address indexed user, uint256 amount);
+    
+    event FundsWithdrawn(address indexed user, uint256 amount);
+    
+    event TraderVerified(address indexed trader);
+    
+    // Modifiers
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can call this function");
+        _;
+    }
+    
+    modifier onlyActiveTrade(uint256 _tradeId) {
+        require(trades[_tradeId].status == TradeStatus.Active, "Trade is not active");
+        _;
+    }
+    
+    modifier onlySeller(uint256 _tradeId) {
+        require(trades[_tradeId].seller == msg.sender, "Only seller can perform this action");
+        _;
+    }
+    
+    constructor() {
+        owner = msg.sender;
+        tradeCounter = 0;
+    }
+    
+    /**
+     * @dev Core Function 1: Create a new trade listing
+     * @param _amount Amount of asset to trade
+     * @param _price Price per unit in wei
+     * @param _assetName Name/description of the asset
+     */
+    function createTrade(
+        uint256 _amount, 
+        uint256 _price, 
+        string memory _assetName
+    ) external {
+        require(_amount > 0, "Amount must be greater than 0");
+        require(_price > 0, "Price must be greater than 0");
+        require(bytes(_assetName).length > 0, "Asset name cannot be empty");
+        
+        tradeCounter++;
+        
+        trades[tradeCounter] = Trade({
+            tradeId: tradeCounter,
+            seller: msg.sender,
+            buyer: address(0),
+            amount: _amount,
+            price: _price,
+            assetName: _assetName,
+            status: TradeStatus.Active,
+            createdAt: block.timestamp,
+            completedAt: 0
+        });
+        
+        userTrades[msg.sender].push(tradeCounter);
+        
+        emit TradeCreated(tradeCounter, msg.sender, _amount, _price, _assetName);
+    }
+    
+    /**
+     * @dev Core Function 2: Execute a trade (buy from active listing)
+     * @param _tradeId ID of the trade to execute
+     */
+    function executeTrade(uint256 _tradeId) external payable onlyActiveTrade(_tradeId) {
+        Trade storage trade = trades[_tradeId];
+        require(msg.sender != trade.seller, "Seller cannot buy their own trade");
+        
+        uint256 totalCost = trade.amount * trade.price;
+        require(msg.value >= totalCost, "Insufficient payment");
+        
+        // Calculate platform fee
+        uint256 platformFee = (totalCost * platformFeePercent) / 10000;
+        uint256 sellerAmount = totalCost - platformFee;
+        
+        // Update trade status
+        trade.buyer = msg.sender;
+        trade.status = TradeStatus.Completed;
+        trade.completedAt = block.timestamp;
+        
+        // Add trade to buyer's history
+        userTrades[msg.sender].push(_tradeId);
+        
+        // Transfer funds to seller
+        userBalance[trade.seller] += sellerAmount;
+        
+        // Transfer platform fee to owner
+        userBalance[owner] += platformFee;
+        
+        // Refund excess payment
+        if (msg.value > totalCost) {
+            payable(msg.sender).transfer(msg.value - totalCost);
+        }
+        
+        emit TradeCompleted(_tradeId, trade.seller, msg.sender, trade.amount);
+    }
+    
+    /**
+     * @dev Core Function 3: Manage user funds (deposit and withdraw)
+     */
+    function depositFunds() external payable {
+        require(msg.value > 0, "Deposit amount must be greater than 0");
+        userBalance[msg.sender] += msg.value;
+        emit FundsDeposited(msg.sender, msg.value);
+    }
+    
+    function withdrawFunds(uint256 _amount) external {
+        require(_amount > 0, "Withdrawal amount must be greater than 0");
+        require(userBalance[msg.sender] >= _amount, "Insufficient balance");
+        
+        userBalance[msg.sender] -= _amount;
+        payable(msg.sender).transfer(_amount);
+        
+        emit FundsWithdrawn(msg.sender, _amount);
+    }
+    
+    // Additional utility functions
+    function cancelTrade(uint256 _tradeId) external onlySeller(_tradeId) onlyActiveTrade(_tradeId) {
+        trades[_tradeId].status = TradeStatus.Cancelled;
+        emit TradeCancelled(_tradeId, msg.sender);
+    }
+    
+    function verifyTrader(address _trader) external onlyOwner {
+        verifiedTraders[_trader] = true;
+        emit TraderVerified(_trader);
+    }
+    
+    function setPlatformFee(uint256 _newFeePercent) external onlyOwner {
+        require(_newFeePercent <= 1000, "Fee cannot exceed 10%"); // Max 10%
+        platformFeePercent = _newFeePercent;
+    }
+    
+    function getTrade(uint256 _tradeId) external view returns (Trade memory) {
+        return trades[_tradeId];
+    }
+    
+    function getUserTrades(address _user) external view returns (uint256[] memory) {
+        return userTrades[_user];
+    }
+    
+    function getUserBalance(address _user) external view returns (uint256) {
+        return userBalance[_user];
+    }
+    
+    function getActiveTradesCount() external view returns (uint256) {
+        uint256 activeCount = 0;
+        for (uint256 i = 1; i <= tradeCounter; i++) {
+            if (trades[i].status == TradeStatus.Active) {
+                activeCount++;
+            }
+        }
+        return activeCount;
+    }
+}
