@@ -18,9 +18,6 @@ Platform Fee System - Sustainable 0.25% fee structure
 Event Logging - Comprehensive events for frontend integration
 Security Modifiers - Role-based access control and validation
 
-📖 README Highlights:
-The README includes all requested sections:
-
 Project Title: TradeXChain
 Project Description: Comprehensive overview of the decentralized trading platform
 Project Vision: Long-term goals for democratizing asset trading
