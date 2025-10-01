@@ -7,9 +7,7 @@ TradeXChain/
 Core Functions (3 main functions as requested):
 
 createTrade() - Create new trade listings with asset details and pricing
-executeTrade() - Execute trades with automatic escrow and fee handling
-depositFunds() / withdrawFunds() - Complete fund management system
-
+executeTrade() - Execute trades with automatic escrow and fee hand
 Additional Features:
 
 Trader Verification System - Build trust through verified trader badges
