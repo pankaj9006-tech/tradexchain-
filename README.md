@@ -12,9 +12,7 @@ Additional Featur
 Trade Status Management - Track trades through their lifecycle
 Platform Fee System - Sustainable 0.25% fee structure
 Event Logging - Comprehensive events for frontend integration
-Security Modifiers - Role-based access control and validation
-
-Project Title: TradeXChain
+Security Modifiers
 Project Description: Comprehensive overview of the decentralized trading platform
 Project Vision: Long-term goals for democratizing asset trading
 Key Features: Detailed breakdown of current functionality
