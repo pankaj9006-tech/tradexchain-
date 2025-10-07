@@ -6,8 +6,7 @@ TradeXChain/
 🔧 Smart Contract Features:
 Core Functions (3 main functions as requested):
 
-createTrade() - Create new trade listings with asset details and pricing
-executeTrade() -
+createTrade() - Create new trade listings
 Additional Featur
 Trade Status Management - Track trades through their lifecycle
 Platform Fee System - Sustainable 0.25% fee structure
