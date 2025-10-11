@@ -10,7 +10,7 @@ createTrade() - Create new trade listings
 Additional Featur
 Trade Status Management - Track trades through their lifecycle
 Platform Fee System - Sustainable 0.25% fee structure
-Event Logging - Comprehensive events for frontend integration
+Event Logging - Comprehensive 
 Security Modifiers
 Project Description: Comprehensive overview of the decentralized trading platform
 Project Vision: Long-term goals for democratizing asset trading
