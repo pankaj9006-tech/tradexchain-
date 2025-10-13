@@ -3,7 +3,7 @@ I've created a comprehensive TradeXChain project for you! Here's what I've built
 TradeXChain/
 ├── TradeXChain.sol          # Main smart contract
 └── README.md               # Project documentation
-🔧 Smart Contract Features:
+🔧 Sma
 Core Functions (3 main functions as requested):
 
 createTrade() - Create new trade listings
