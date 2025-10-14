@@ -11,7 +11,6 @@ Additional Featur
 Trade Status Management - Track trades through their lifecycle
 Platform Fee System - Sustainable 0.25% fee structure
 Event Logging - Comprehensive 
-Security Modifiers
 Project Description: Comprehensive overview of the decentralized trading platform
 Project Vision: Long-term goals for democratent functionality
 Future Scope: 5-phase roadmap covering enhanced trading, DeFi integration, and AI features
