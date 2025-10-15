@@ -7,8 +7,7 @@ TradeXChain/
 Core Functions (3 main functions as requested):
 
 createTrade() - Create new trade listings
-Additional Featur
-Trade Status Management - Track trades through their lifecycle
+Additional Featurgh their lifecycle
 Platform Fee System - Sustainable 0.25% fee structure
 Event Logging - Comprehensive 
 Project Description: Comprehensive overview of the decentralized trading platform
