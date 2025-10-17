@@ -14,4 +14,4 @@ Project Description: Comprehensive overview of the decentralized trading platfor
 Project Vision: Long-term goals for democratent functionality
 Future Scope: 5-phase roadmap covering enhanced trading, DeFi integration, and AI features
 contract detail:0xF0778bC35bEBDD00CcAf5E23b440B8935e453d19
-<img width="1909" height="1037" alt="Screenshot 2025-09-26 183743" src="https://github.com/user-attachments/assets/fd5f712f-a38c-4a49-b1aa-90ebfbbcda6f" />
+<img width="1909" height="1037" alt="Screenshot 2025-09-26 183743" src="https://github.com/user-attachments/assets/fd5f712f-a38c-4a49-b1aa-90ebfb
