@@ -8,7 +8,7 @@ Core Functions (3 main functions as requested):
 
 createTrade() - Create new trade listings
 Additional Featurgh their lifecycle
-Platform Fee System - Sustainable 0.25% fee structure
+Platform Fee System - Sustainable 0.25% fee s
 Event Logging - Comprehensive 
 Project Description: Comprehensive overview of the decentralized trading platform
 Project Vision: Long-term goals ent functionality
