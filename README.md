@@ -12,6 +12,6 @@ Platform Fee System - Sustainable 0.25% fee s
 Event Logging - Comprehensive 
 Project Description: Comprehensive overview of the decentralized trading platform
 Project Vision: Long-term goals ent functionality
-Future Scope: 5-phase roadmap covering enhanced trading, DeFi integration, and AI featuresdsdvdbhhg
+Future Scope: 5-phase roadmag enhanced trading, DeFi integration, and AI featuresdsdvdbhhg
 contract detail:0xF0778bC35bEBDD00CcAf5E23b440B8935e453d19
 <img width="1909" height="1037" alt="Screenshot 2025-09-26 183743" src="https://github.com/user-attachments/assets/fd5f712f-a38c-4a49-b1aa-90ebfb
