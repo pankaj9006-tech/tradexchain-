@@ -4,8 +4,7 @@ TradeXChain/
 ├── TradeXChain.sol          # Main smart contract
 └── README.md               # Project documentation
 🔧 Sma
-Core Functions (3 main functions as requested):
-
+Core Functions (3 main functions as reques
 createTrade() - Create new trade listings
 Additional Featurgh their lifecycle
 Platform Fee System - Sustainable 0.25% fee s
