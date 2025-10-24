@@ -9,7 +9,7 @@ createTrade() - Create new trade listings
 Additional Featurgh their lifecycle
 Platform Fee System - Sustainable 0.25% fee s
 Event Logging - Comprehensive 
-Project Description: Comprehensive overview of the decentralized trading platform
+Project Description: Comprehensive the decentralized trading platform
 Project Vision: Long-term goals ent functionality
 Future Scope: 5-phase roadmag enhanced trading, DeFi integration, and AI featuresdsdvdbhhg
 contract detail:0xF0778bC35bEBDD00CcAf5E23b440B8935e453d19
